@@ -1,0 +1,10 @@
+@Calc
+
+Init [..][..]{
+  Self = 0;
+}
+
+.max [Num][~]{
+	x = Self > n ? Self : n;
+	Self = x;
+}

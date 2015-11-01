@@ -1,0 +1,9 @@
+@Person
+
+Init [Str][name]{
+	Self = name
+}
+
+.name [..][..]{
+<- Self.name
+}
