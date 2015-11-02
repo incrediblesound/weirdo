@@ -1,7 +1,7 @@
 @Person
 
 Init [Str][name]{
-	Self = name
+	Self = {name: name, age: age}
 }
 
 .age [Num][age]{

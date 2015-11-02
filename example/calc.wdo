@@ -1,7 +1,7 @@
 @Calc
 
 Init [..][..]{
-  Self = 0;
+  Self = { max: 0 };
 }
 
 .max [Num][~]{

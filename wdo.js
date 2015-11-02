@@ -49,7 +49,7 @@ _String.prototype.get = function(){
 var wdo_object = function(){};
 wdo_object.prototype.wdo_get = function(attr){
 	if(this.data[attr] === undefined){
-		return this.data["init"];
+		throw new Error('Error: attribute \"'+attr+'\" has not been initialized.');
 	} else {
 		return this.data[attr];
 	}
