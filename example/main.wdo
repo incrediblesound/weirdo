@@ -5,12 +5,18 @@ calc <- Calc
 person <- Person[ "John" ]
 
 sum <- Num
+age <- Num
 name <- Str
 
 calc.max[ 2 , 3 ]
+calc.max[ 13 ]
+calc.max[ 7 ]
+person.age[ 13 ]
 
 calc.max -> sum
-person.init -> name
+person.name -> name
+person.age -> age
 
 sys.out[ sum  ]
 sys.out[ name ]
+sys.out[ age ]

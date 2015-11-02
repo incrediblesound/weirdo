@@ -46,9 +46,19 @@ _String.prototype.get = function(){
 	return this.value;
 }
 
+var wdo_object = function(){};
+wdo_object.prototype.wdo_get = function(attr){
+	if(this.data[attr] === undefined){
+		return this.data["init"];
+	} else {
+		return this.data[attr];
+	}
+}
+
 var out = function(obj){
 	console.log(obj.get());
 }
+
 
 module.exports = {
 	argsAreNumbers: argsAreNumbers,
@@ -56,5 +66,6 @@ module.exports = {
 	invokeRecursive: invokeRecursive,
 	Num: _Number,
 	Str: _String,
-	out: out
+	out: out,
+	wdo_object: wdo_object
 }

@@ -4,6 +4,6 @@ Init [Str][name]{
 	Self = name
 }
 
-.name [Str][name]{
-	Self = name
+.age [Num][age]{
+	Self = age
 }
