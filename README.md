@@ -12,7 +12,7 @@ A weirdo program consists of a set of modules and a single main file. Below is a
 
                   // every module requires an Init function
 Init [..][..]{    // this function takes no arguments
-  Self = 0;       // the module has an initial state of 0
+  Self = {max: 0 };       // the module has an initial state for each method
 }
 
 .max [Num][~]{                // max takes number arguments and is invoked recursively
