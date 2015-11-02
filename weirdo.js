@@ -1,5 +1,6 @@
 var fs = require('fs');
 
+var _ =				  require('./lib/Util.js');
 var parsers = 		  require('./lib/tokenStream.js');
 var ParseText = 	  require('./lib/parseText.js');
 var CompilerControl = require('./lib/compilerControl.js');
@@ -24,7 +25,7 @@ var control = new CompilerControl();
 var finalResult = fileComponents.headerString;
 var parseText, pieces, moduleText;
 
-each(moduleFiles, function(module){
+_.each(moduleFiles, function(module){
 	moduleText = fs.readFileSync('./example/'+module+'.wdo').toString();
 	parseText = new ParseText(moduleText);
 	pieces = parsers.moduleParser(parseText);
@@ -32,26 +33,10 @@ each(moduleFiles, function(module){
 	finalResult += control.empty();
 })
 
-mainLines = removeEmpties(mainLines);
+mainLines = _.removeEmpties(mainLines);
 pieces = parsers.mainParser(mainLines);
-console.log(pieces);
-// compilePieces(pieces, control);
 
+compilePieces(pieces, control);
+
+finalResult += control.empty();
 fs.writeFileSync('test.js', finalResult);
-
-function each(arr, fn){
-	var i = 0, l = arr.length;
-	for(i; i < l; i++){
-		fn(arr[i], i);
-	}
-}
-
-function removeEmpties(arr){
-	var result = [];
-	each(arr, function(item){
-		if(item.length){
-			result.push(item);
-		}
-	})
-	return result;
-}

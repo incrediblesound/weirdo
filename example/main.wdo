@@ -1,16 +1,16 @@
 include "calc"
 include "person"
 
-_calc <- Calc
-_person <- Person[ "John" ]
+calc <- Calc
+person <- Person[ "John" ]
 
-sum <- Number
-name <- String
+sum <- Num
+name <- Str
 
-_math.add[ 2 , 3 ]
+calc.max[ 2 , 3 ]
 
-_math.add -> sum
-_person.name -> name
+calc.max -> sum
+person.init -> name
 
 sys.out[ sum  ]
 sys.out[ name ]

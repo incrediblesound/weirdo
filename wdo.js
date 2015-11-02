@@ -7,11 +7,54 @@ var argsAreNumbers = function(args, method){
 	}
 }
 
+var argsAreStrings = function(args, method){
+	var i = 0, l = args.length;
+	for(i; i < l; i++){
+		if(typeof args[i] !== 'string'){
+			throw new Error('Method '+method+' only accepts string arguments');
+		}
+	}
+}
+
 var invokeRecursive = function(func, context, args){
-	func.apply(context, args);
+	while(args.length){
+		func.apply(context, [args.shift()]);
+	}
+}
+
+var _Number = function(){}
+_Number.prototype.set = function(value){
+	if(typeof value !== 'number'){
+		throw new Error('Error: non-number assigned to number value');
+	} else {
+		this.value = value;
+	}
+}
+_Number.prototype.get = function(){
+	return this.value;
+}
+
+var _String = function(){}
+_String.prototype.set = function(value){
+	if(typeof value !== 'string'){
+		throw new Error('Error: non-string assigned to string value');
+	} else {
+		this.value = value;
+	}
+}
+_String.prototype.get = function(){
+	return this.value;
+}
+
+var out = function(obj){
+	console.log(obj.get());
 }
 
 module.exports = {
 	argsAreNumbers: argsAreNumbers,
-	invokeRecursive: invokeRecursive
+	argsAreStrings: argsAreStrings,
+	invokeRecursive: invokeRecursive,
+	Num: _Number,
+	Str: _String,
+	out: out
 }
