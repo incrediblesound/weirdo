@@ -6,8 +6,17 @@ var ParseText = 	  require('./lib/parseText.js');
 var CompilerControl = require('./lib/compilerControl.js');
 var compilePieces =   require('./lib/compiler.js');
 var fileComponents =  require('./lib/fileComponents.js');
+var program = 	  	  require('commander');
 
-var text = fs.readFileSync('./example/main.wdo').toString();
+program.parse(process.argv);
+var src_arg = program.args[0];
+var out_arg = program.args[1];
+
+var pathParts = src_arg.split('/');
+pathParts.pop();
+var sourcePath = pathParts.join('/');
+
+var text = fs.readFileSync(''+src_arg+'.wdo').toString();
 var mainLines = text.split(/\n|\r|\n\r/);
 
 var include = new RegExp('^include \".+\"');
@@ -26,7 +35,7 @@ var finalResult = fileComponents.headerString;
 var parseText, pieces, moduleText;
 
 _.each(moduleFiles, function(module){
-	moduleText = fs.readFileSync('./example/'+module+'.wdo').toString();
+	moduleText = fs.readFileSync(sourcePath+'/'+module+'.wdo').toString();
 	parseText = new ParseText(moduleText);
 	pieces = parsers.moduleParser(parseText);
 	compilePieces(pieces, control);
@@ -39,4 +48,4 @@ pieces = parsers.mainParser(mainLines);
 compilePieces(pieces, control);
 
 finalResult += control.empty();
-fs.writeFileSync('test.js', finalResult);
+fs.writeFileSync(out_arg, finalResult);

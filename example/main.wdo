@@ -12,7 +12,10 @@ name <- Str
 calc.max[ 2 , 3 ]
 calc.max[ 13 ]
 calc.max[ 7 ]
-calc.deviation[ 13,24,56,81,42 ]
+calc.deviation[ 13,24,56,81 ]
+calc.deviation -> dev
+sys.out[ dev ]
+calc.deviation[ 42 ]
 person.age[ 13 ]
 
 calc.max -> sum

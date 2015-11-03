@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "commander": "^2.9.0",
     "esprima": "^2.7.0"
   }
 }
