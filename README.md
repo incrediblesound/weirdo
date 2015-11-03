@@ -3,6 +3,13 @@ Weirdo
 
 Weirdo is my attempt to manifest all my weird ideas about software into a language that transpiles into JavaScript. It is currently in active development so I am still fleshing out the main features and organizing the code-base.
 
+How to Transpile
+---------
+The weirdo main file takes two arguments: the path to the main file of your weirdo program and the output file to be generated.
+```shell
+node weirdo.js /path/to/main output.js
+```
+
 Module System
 -------------
 A weirdo program consists of a set of modules and a single main file. Modules have methods that maintain state and all most logic should be encapsulated in modules. In the main file you create instances of modules and feed them data. Below is a weirdo program that will transpile and run just fine. Lets start with a simple module:
