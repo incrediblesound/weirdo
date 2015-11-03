@@ -5,7 +5,7 @@ Weirdo is my attempt to manifest all my weird ideas about software into a langua
 
 Module System
 -------------
-A weirdo program consists of a set of modules and a single main file. Below is a weirdo program that will transpile and run just fine. Lets start with a simple module:
+A weirdo program consists of a set of modules and a single main file. Modules have methods that maintain state and all most logic should be encapsulated in modules. In the main file you create instances of modules and feed them data. Below is a weirdo program that will transpile and run just fine. Lets start with a simple module:
 
 ```code
 @Calc             // declare a module named Calc
