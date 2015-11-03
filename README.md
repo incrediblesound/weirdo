@@ -35,7 +35,7 @@ calc.max[ 7, 1, 5 ]
 
 calc.max -> result  // dump the state of the max method into result
 
-sys.out[ result  ]  // print the value of result to the console (which is 13 if you didn't already guess)
+sys.out[ result  ]  // print the value of result to the console (which is 13 btw)
 ```
 
 Stay tuned for more developments, that is, if you're into that kind of weird stuff.
