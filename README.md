@@ -84,3 +84,23 @@ Init [..][..]{
 	Self.dev = Math.sqrt(c);	// store square root of c on Self.dev
 }
 ```
+Now we can use our new method like this:
+```code
+include "calc"
+
+calc <- Calc
+dev <- Num
+
+calc.deviation[ 13,24,56,81 ]
+calc.deviation -> dev
+sys.out[ dev ]
+calc.deviation[ 42 ]
+calc.deviation -> dev
+sys.out[ dev ]
+
+```
+The above code will log
+```shell
+26.800186566514792
+23.978323544401512
+```
