@@ -38,4 +38,49 @@ calc.max -> result  // dump the state of the max method into result
 sys.out[ result  ]  // print the value of result to the console (which is 13 btw)
 ```
 
-Stay tuned for more developments, that is, if you're into that kind of weird stuff.
+Ok, now lets try a more complicated example. I will add a method to the Calc module that takes numbers and whose state reflects the current standard deviation of all numbers inputed so far.
+
+```code
+@Calc
+
+// first of all, we add a comlex state object for our 
+// standard deviation method
+
+Init [..][..]{
+  Self = { 
+  deviation: {num: 0, avg: 0, sum: 0, log: [], dev: 0 },
+  max: 0
+  };
+}
+
+.max [Num][~]{ ... }
+
+// we've decided to represent the computed deviation with the
+// property "dev" so we only want to return that when using 
+// the right arrow. The arrow in the arguments place indicates
+// that this method overrides the normal state return
+.deviation [..][->]{
+	<- Self.dev;
+}
+
+.deviation [Num][~]{
+	Self.num++;					// increment the count of input values
+	Self.sum += n;				// increment the sum of inputs
+	Self.log.push(n);       	// store this input value
+	diffs = [];             
+	x = Self.sum / Self.num;	// x is our current average
+	each Self.log y ->			// if loop sugar!
+		z = y - x;				// z is current input minus avg of inputs
+		z = z * z;				// z is now z squared
+		diffs.push(z);			// store z
+	each;						// remember to end if loops with "each;"
+
+	a = 0;
+	each diffs b ->				// calculate total of diffs
+		a += b;
+	each;
+	c = a / diffs.length;		// store average of diffs in c
+
+	Self.dev = Math.sqrt(c);	// store square root of c on Self.dev
+}
+```
