@@ -1,10 +1,38 @@
 @Calc
 
 Init [..][..]{
-  Self = { max: 0 };
+  Self = { 
+  deviation: {num: 0, avg: 0, sum: 0, log: [], dev: 0 },
+  max: 0
+  };
 }
 
 .max [Num][~]{
 	x = Self > n ? Self : n;
 	Self = x;
+}
+
+.deviation [..][->]{
+	<- Self.dev;
+}
+
+.deviation [Num][~]{
+	Self.num++;
+	Self.sum += n;
+	Self.log.push(n);
+	diffs = [];
+	x = Self.sum / Self.num;
+	each Self.log y ->
+		z = y - x;
+		z = z * z;
+		diffs.push(z);
+	each;
+
+	a = 0;
+	each diffs b ->
+		a += b;
+	each;
+	c = a / diffs.length;
+
+	Self.dev = Math.sqrt(c);
 }

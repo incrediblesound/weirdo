@@ -1,2 +1,4 @@
 .DS_Store
 test.js
+node_modules/
+node_modules/*

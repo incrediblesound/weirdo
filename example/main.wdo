@@ -5,18 +5,21 @@ calc <- Calc
 person <- Person[ "John" ]
 
 sum <- Num
+dev <- Num
 age <- Num
 name <- Str
 
 calc.max[ 2 , 3 ]
 calc.max[ 13 ]
 calc.max[ 7 ]
+calc.deviation[ 13,24,56,81,42 ]
 person.age[ 13 ]
 
 calc.max -> sum
+calc.deviation -> dev
 person.name -> name
 person.age -> age
 
-sys.out[ sum  ]
+sys.out[ dev  ]
 sys.out[ name ]
 sys.out[ age ]
