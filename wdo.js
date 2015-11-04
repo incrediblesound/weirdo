@@ -1,17 +1,22 @@
-var argsAreNumbers = function(args, method){
-	var i = 0, l = args.length;
-	for(i; i < l; i++){
-		if(typeof args[i] !== 'number'){
-			throw new Error('Method '+method+' only accepts number arguments');
-		}
-	}
-}
+var argsAreNumbers = ARG_IS_TYPE('number');
 
-var argsAreStrings = function(args, method){
-	var i = 0, l = args.length;
-	for(i; i < l; i++){
-		if(typeof args[i] !== 'string'){
-			throw new Error('Method '+method+' only accepts string arguments');
+var argsAreStrings = ARG_IS_TYPE('string');
+
+function ARG_IS_TYPE(type){
+	return function(args, method){
+		if(!Array.isArray(args)){
+			if(typeof args !== type){
+				throw new Error('Method '+method+' has '+typeof args+
+					' argument in a '+type+' argument position');
+			};
+		} else {
+			var i = 0, l = args.length;
+			for(i; i < l; i++){
+				if(typeof args[i] !== type){
+					throw new Error('Method '+method+' has '+typeof args[i]+
+						' argument in a '+type+' argument position');
+				}
+			}
 		}
 	}
 }

@@ -6,7 +6,7 @@ person <- Person[ "John" ]
 
 sum <- Num
 dev <- Num
-age <- Num
+info <- Str
 name <- Str
 
 calc.max[ 2 , 3 ]
@@ -16,13 +16,11 @@ calc.deviation[ 13,24,56,81 ]
 calc.deviation -> dev
 sys.out[ dev ]
 calc.deviation[ 42 ]
-person.age[ 13 ]
+person.info[ 13, "John Doe" ]
 
 calc.max -> sum
 calc.deviation -> dev
-person.name -> name
-person.age -> age
+person.info -> info
 
 sys.out[ dev  ]
-sys.out[ name ]
-sys.out[ age ]
+sys.out[ info ]

@@ -1,9 +1,14 @@
 @Person
 
 Init [Str][name]{
-	Self = {name: name, age: age}
+	Self = {info: { name: name, age: null }}
 }
 
-.age [Num][age]{
-	Self = age
+.info [..][->]{
+	<- Self.name + ", "+ Self.age + "yo";
+}
+
+.info [Num, Str][age, name]{
+	Self.age = age;
+	Self.name = name;
 }
