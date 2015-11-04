@@ -74,8 +74,10 @@ Init [..][..]{
 	Self.num++;					// increment the count of input values
 	Self.sum += n;				// increment the sum of inputs
 	Self.log.push(n);       	// store this input value
+	
 	diffs = [];             
 	x = Self.sum / Self.num;	// x is our current average
+	
 	each Self.log y ->			// if loop sugar!
 		z = y - x;				// z is current input minus avg of inputs
 		z = z * z;				// z is now z squared
@@ -83,9 +85,11 @@ Init [..][..]{
 	each;						// remember to end if loops with "each;"
 
 	a = 0;
+	
 	each diffs b ->				// calculate total of diffs
 		a += b;
 	each;
+	
 	c = a / diffs.length;		// store average of diffs in c
 
 	Self.dev = Math.sqrt(c);	// store square root of c on Self.dev
@@ -101,6 +105,7 @@ dev <- Num
 calc.deviation[ 13,24,56,81 ]
 calc.deviation -> dev
 sys.out[ dev ]
+
 calc.deviation[ 42 ]
 calc.deviation -> dev
 sys.out[ dev ]
