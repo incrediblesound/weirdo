@@ -44,7 +44,6 @@ _.each(moduleFiles, function(module){
 
 mainLines = _.removeEmpties(mainLines);
 pieces = parsers.mainParser(mainLines);
-
 compilePieces(pieces, control);
 
 finalResult += control.empty();

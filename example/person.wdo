@@ -5,7 +5,7 @@ Init [Str][name]{
 }
 
 .info [..][->]{
-	<- Self.name + ", "+ Self.age + "yo";
+	<- Self.name + ", "+ Self.age + " yo.";
 }
 
 .info [Num, Str][age, name]{
