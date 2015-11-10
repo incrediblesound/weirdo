@@ -116,3 +116,45 @@ The above code will log
 26.800186566514792
 23.978323544401512
 ```
+More Syntax
+-----------
+
+Typed Arguments:
+
+```code
+@Person
+
+Init [Str][name]{
+	Self = {info: { name: name, age: null }}
+}
+
+.info [..][->]{
+	x = Self.name + ", "+ Self.age + " yo."; 
+	<- x;
+}
+
+.info [Num, Str][age, name]{
+	Self.age = age;
+	Self.name = name;
+}
+```
+
+If, else if sugar:
+
+```code
+@Stuff
+
+Init [..][..]{
+	Self = 0;
+}
+
+.action[Num][n]{
+	if(n > 8) ->
+		Self = n;
+	elif(n > 5) ->
+		Self = false;
+	else ->
+		Self = true;
+	if;
+}
+```
