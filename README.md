@@ -159,7 +159,7 @@ Init [..][..]{
 }
 ```
 ###conditional loop:
-I've decided to implement certain patterns as "tilde expressions". Currently the first and only tilde expression in the conditional loop. Consider the following example, first the module:
+I've decided to implement certain patterns as "tilde expressions". The idea is to create high-level control structures by wrapping block of code between two tildes. Currently the first and only tilde expression is the conditional loop. Consider the following example, first the module:
 ```
 @Looper
 
