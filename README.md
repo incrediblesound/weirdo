@@ -145,7 +145,7 @@ Init [Str][name]{
 @Stuff
 
 Init [..][..]{
-	Self = 0;
+	Self = { action: 0 };
 }
 
 .action[Num][n]{
