@@ -119,7 +119,7 @@ The above code will log
 More Syntax
 -----------
 
-Typed Arguments:
+###Typed Arguments:
 
 ```code
 @Person
@@ -139,7 +139,7 @@ Init [Str][name]{
 }
 ```
 
-If, else if sugar:
+###if / else if sugar:
 
 ```code
 @Stuff
@@ -157,4 +157,47 @@ Init [..][..]{
 		Self = true;
 	if;
 }
+```
+###conditional loop:
+I've decided to implement certain patterns as "tilde expressions". Currently the first and only tilde expression in the conditional loop. Consider the following example, first the module:
+```
+@Looper
+
+Init [..][..]{
+	Self = {action: ''};
+}
+
+.action[..][->]{
+	<- Self;
+}
+
+.action[..][n]{
+	Self = "You typed: " + n.get();
+}
+
+.checkExit[..][x]{
+	if(x.get() !== "quit") ->
+		<- true;
+	else ->
+		<- false;
+	if;
+}
+```
+Now the main file:
+```code
+include "looper"
+
+looper <- Looper
+input <- Str
+output <- Str
+
+~loop[ looper.checkExit[ input ] ]   // loops the following code as long as checkExit returns true 
+
+sys.in[ input ]                      // gets a line and puts it in input
+
+looper.action[ input ]               // feed input into action
+looper.action -> output              // dump action into output
+
+sys.out[ output ]                    // print output
+~                                    // end loop block
 ```
