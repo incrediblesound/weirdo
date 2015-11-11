@@ -1,3 +1,11 @@
+var readline = require('readline-sync');
+
+var input = function(value){
+	var answer = readline.question('> ');
+	value.set(answer);
+	return value;
+}
+
 var argsAreNumbers = ARG_IS_TYPE('number');
 
 var argsAreStrings = ARG_IS_TYPE('string');
@@ -60,7 +68,7 @@ wdo_object.prototype.wdo_get = function(attr){
 	}
 }
 
-var out = function(obj){
+var output = function(obj){
 	console.log(obj.get());
 }
 
@@ -71,6 +79,7 @@ module.exports = {
 	invokeRecursive: invokeRecursive,
 	Num: _Number,
 	Str: _String,
-	out: out,
-	wdo_object: wdo_object
+	out: output,
+	wdo_object: wdo_object,
+	in: input
 }

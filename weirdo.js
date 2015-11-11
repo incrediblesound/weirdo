@@ -1,12 +1,12 @@
 var fs = require('fs');
+var program = require('commander');
 
-var _ =				  require('./lib/Util.js');
-var parsers = 		  require('./lib/tokenStream.js');
-var ParseText = 	  require('./lib/parseText.js');
-var CompilerControl = require('./lib/compilerControl.js');
+var _ =				  require('./lib/utility/Util.js');
+var ParseText = 	  require('./lib/utility/parseText.js');
+var CompilerControl = require('./lib/utility/compilerControl.js');
+var fileComponents =  require('./lib/utility/fileComponents.js');
 var compilePieces =   require('./lib/compiler.js');
-var fileComponents =  require('./lib/fileComponents.js');
-var program = 	  	  require('commander');
+var parsers = 		  require('./lib/parsers.js');
 
 program.parse(process.argv);
 var src_arg = program.args[0];
