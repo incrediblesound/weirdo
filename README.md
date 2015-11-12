@@ -44,6 +44,23 @@ calc.max -> result  // dump the state of the max method into result
 
 sys.out[ result  ]  // print the value of result to the console (which is 13 btw)
 ```
+That main file doesn't look much like JavaScript does it. A Weirdo main file contains three different kinds of basic expressions:
+
+###Instance
+```code
+calc <- Calc   // calc is now an instance of the Calc module with its own state
+sum  <- Num    // sum is an instance of a Weirdo number value
+name <- Str    // name is an instance of a Weirdo string value
+```
+###Invocation
+```code
+calc.max[ 2, 3 ] // This invokes the method "max" on the module instance calc with the arguments 2 and 3
+sys.out[ name ]  // This invokes the system out function with the string instance name
+```
+###assignment
+```code
+calc.max -> num  // num is set to the state of the max method or the return value of the max getter
+```
 
 Ok, now lets try a more complicated example. I will add a method to the Calc module that takes numbers and whose state reflects the current standard deviation of all numbers inputed so far.
 
