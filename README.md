@@ -78,7 +78,7 @@ Init [..][..]{
 	diffs = [];             
 	x = Self.sum / Self.num;	// x is our current average
 	
-	each Self.log y ->			// if loop sugar!
+	each Self.log y ->			// for loop sugar!
 		z = y - x;				// z is current input minus avg of inputs
 		z = z * z;				// z is now z squared
 		diffs.push(z);			// store z
