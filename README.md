@@ -133,10 +133,25 @@ The above code will log
 26.800186566514792
 23.978323544401512
 ```
+Features
+--------
+Each method has its own state which is determined by a property of the module's state and is pointed to by "Self" when inside the method. When assigning the state of a method to a variable in the main file the entire state will be dumped into the variable unless you define a special function like in the deviation example above.
+
+Main files are basically a high level coordination of input/output values and module methods. There is very little control except for that which is currently provided in tilde blocks.
+
+There are certain core functions available in the "sys" namespace some of which are available in methods and some in main. Here is the current list:
+
+loadText - method::(path) - synchronously loads a file as text with the fs module    
+processPost - method::(req, res, callback) - loads and parses post data which is returned in the callback    
+renderView - method::(string, data) - just a wrapper around mustache.parse    
+output - main/method:: console.log    
+input - main::(value) - reads a line from stdin and places it in value    
+
 More Syntax
 -----------
 
-###Typed Arguments:
+###Typed Arguments
+For methods that take primitives you can specify basic types:
 
 ```code
 @Person
@@ -156,16 +171,11 @@ Init [Str][name]{
 }
 ```
 
-###if / else if sugar:
+###if / else if sugar
+Inside modules if / else if blocks have a little syntactic sugar:
 
 ```code
-@Stuff
-
-Init [..][..]{
-	Self = { action: 0 };
-}
-
-.action[Num][n]{
+.method[Num][n]{
 	if(n > 8) ->
 		Self = n;
 	elif(n > 5) ->
@@ -176,7 +186,7 @@ Init [..][..]{
 }
 ```
 ###conditional loop:
-I've decided to implement certain patterns as "tilde expressions". The idea is to create high-level control structures by wrapping block of code between two tildes. Currently the first and only tilde expression is the conditional loop. Consider the following example, first the module:
+I've decided to implement certain patterns as "tilde expressions". The idea is to create high-level control structures by wrapping block of code between two tildes. Consider the following example, first the module:
 ```
 @Looper
 
@@ -218,3 +228,12 @@ looper.action -> output              // dump action into output
 sys.out[ output ]                    // print output
 ~                                    // end loop block
 ```
+The previous example shows how a tilde block with keyword "loop" can be used to conditionally loop over a block of code. The other use of a tilde block is to set up an event listener. Currently this usage is in development and only has one set implementation: the http server. [Here is a full example](https://github.com/incrediblesound/weirdo/tree/master/example/one) of an http server that parses post data and render templates with [mustache](https://github.com/janl/mustache.js). The tilde block event listener looks like this:
+```code
+~on[ sys.server.receive ]
+
+router.process[ request, response ]
+
+~
+```
+When the http server receives a request, the block of code inside the tildes will run with the request and response objects automatically instantiated.
