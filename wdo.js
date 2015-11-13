@@ -1,10 +1,17 @@
 var readline = require('readline-sync');
+var fs = require('fs');
 var http = require('http');
 
 var input = function(value){
 	var answer = readline.question('> ');
 	value.set(answer);
 	return value;
+}
+
+var loadText = function(path){
+	var file = fs.readFileSync(path, 'utf8');
+	file = file.toString();
+	return file;
 }
 
 var argsAreNumbers = ARG_IS_TYPE('number');
@@ -79,6 +86,7 @@ module.exports = {
 	argsAreNumbers: argsAreNumbers,
 	argsAreStrings: argsAreStrings,
 	invokeRecursive: invokeRecursive,
+	loadText: loadText,
 	Num: _Number,
 	Str: _String,
 	out: output,

@@ -1,0 +1,29 @@
+@Router
+
+Init[..][..]{
+	Self = { process: {}}
+}
+
+.process[..][req, res]{
+
+	if(req.url === '/') ->
+
+		home = sys.loadText('./example/one/templates/home.html');
+		res.end(home);
+
+	elif(req.url === '/next') ->
+
+		next = sys.loadText('./example/one/templates/next.html');
+		res.end(next);
+
+	else ->
+
+		=> errorHandler[ res ];
+
+	if;
+
+}
+
+.errorHandler[..][res]{
+	res.end("Error handling request.")
+}

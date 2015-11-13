@@ -1,0 +1,9 @@
+include "router"
+
+router <- Router
+
+~on[ sys.server.receive ]
+
+router.process[ request, response ]
+
+~
