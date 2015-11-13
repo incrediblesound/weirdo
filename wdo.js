@@ -1,6 +1,8 @@
 var readline = require('readline-sync');
 var fs = require('fs');
+var qs = require('querystring');
 var http = require('http');
+var mustache = require('mustache');
 
 var input = function(value){
 	var answer = readline.question('> ');
@@ -12,6 +14,29 @@ var loadText = function(path){
 	var file = fs.readFileSync(path, 'utf8');
 	file = file.toString();
 	return file;
+}
+
+var processPost = function(req, res, callback) {
+    var body = '';
+    if(typeof callback !== 'function') return null;
+
+    req.on('data', function(data) {
+        body += data;
+        if(body.length > 1e6) {
+            body = '';
+            res.writeHead(413, {'Content-Type': 'text/plain'}).end();
+            req.connection.destroy();
+        }
+    });
+
+    req.on('end', function() {
+        body = qs.parse(body);
+        callback(body);
+    });
+}
+
+var renderView = function(string, view){
+	return mustache.render(string, view);
 }
 
 var argsAreNumbers = ARG_IS_TYPE('number');
@@ -87,6 +112,8 @@ module.exports = {
 	argsAreStrings: argsAreStrings,
 	invokeRecursive: invokeRecursive,
 	loadText: loadText,
+	processPost: processPost,
+	renderView: renderView,
 	Num: _Number,
 	Str: _String,
 	out: output,

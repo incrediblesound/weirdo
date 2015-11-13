@@ -11,6 +11,7 @@
   "dependencies": {
     "commander": "^2.9.0",
     "esprima": "^2.7.0",
+    "mustache": "^2.2.0",
     "readline-sync": "^1.2.21"
   }
 }

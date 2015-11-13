@@ -6,6 +6,20 @@ Init[..][..]{
 
 .process[..][req, res]{
 
+	if(req.method === 'GET') ->
+
+		=> get[ req, res ];
+
+	elif(req.method === 'POST') ->
+
+		=> post[ req, res ];
+
+	if;
+
+}
+
+.get[..][req, res]{
+
 	if(req.url === '/') ->
 
 		home = sys.loadText('./example/one/templates/home.html');
@@ -15,6 +29,24 @@ Init[..][..]{
 
 		next = sys.loadText('./example/one/templates/next.html');
 		res.end(next);
+
+	else ->
+
+		=> errorHandler[ res ];
+
+	if;
+	
+}
+
+.post[..][req, res]{
+	
+	if(req.url === "/user") ->
+
+		sys.processPost(req, res, function(data){
+			welcome = sys.loadText('./example/one/templates/welcome.html');
+			view = sys.renderView(welcome, data);
+			res.end(view);
+		});
 
 	else ->
 
