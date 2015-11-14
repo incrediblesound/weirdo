@@ -141,11 +141,11 @@ Main files are basically a high level coordination of input/output values and mo
 
 There are certain core functions available in the "sys" namespace some of which are available in methods and some in main. Here is the current list:
 
-loadText - method::(path) - synchronously loads a file as text with the fs module    
-processPost - method::(req, res, callback) - loads and parses post data which is returned in the callback    
-renderView - method::(string, data) - just a wrapper around mustache.parse    
-output - main/method:: console.log    
-input - main::(value) - reads a line from stdin and places it in value    
+**loadText** - method::(path) - synchronously loads a file as text with the fs module    
+**processPost** - method::(req, res, callback) - loads and parses post data which is returned in the callback    
+**renderView** - method::(string, data) - just a wrapper around mustache.parse    
+**output** - main/method:: console.log    
+**input** - main::(value) - reads a line from stdin and places it in value 
 
 More Syntax
 -----------
