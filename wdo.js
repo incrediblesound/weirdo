@@ -4,6 +4,12 @@ var qs = require('querystring');
 var http = require('http');
 var mustache = require('mustache');
 
+// Utility functions for convenience //
+
+var output = function(obj){
+	console.log(obj.get());
+}
+
 var input = function(value){
 	var answer = readline.question('> ');
 	value.set(answer);
@@ -39,6 +45,8 @@ var renderView = function(string, view){
 	return mustache.render(string, view);
 }
 
+// argument type verifiers //
+
 var argsAreNumbers = ARG_IS_TYPE('number');
 
 var argsAreStrings = ARG_IS_TYPE('string');
@@ -62,11 +70,15 @@ function ARG_IS_TYPE(type){
 	}
 }
 
+// Used to invoke recursive methods //
+
 var invokeRecursive = function(func, context, args){
 	while(args.length){
 		func.apply(context, [args.shift()]);
 	}
 }
+
+// basic types for Weirdo values //
 
 var _Number = function(){}
 _Number.prototype.set = function(value){
@@ -92,6 +104,8 @@ _String.prototype.get = function(){
 	return this.value;
 }
 
+// Parent class of Weirdo modules //
+
 var wdo_object = function(){};
 
 wdo_object.prototype.wdo_get = function(attr){
@@ -101,11 +115,6 @@ wdo_object.prototype.wdo_get = function(attr){
 		return this.data[attr];
 	}
 }
-
-var output = function(obj){
-	console.log(obj.get());
-}
-
 
 module.exports = {
 	argsAreNumbers: argsAreNumbers,
