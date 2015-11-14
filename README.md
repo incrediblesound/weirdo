@@ -1,7 +1,7 @@
 Weirdo
 ======
 
-Weirdo is my attempt to manifest all my weird ideas about software into a language that transpiles into JavaScript. Other than experimenting with weird ideas, Weirdo is also my attempt to create a fun that has what I personally consider attractive syntax.
+Weirdo is my attempt to manifest all my weird ideas about software into a language that transpiles into JavaScript. Other than experimenting with weird ideas, Weirdo is also my attempt to create a fun language that has what I personally consider attractive syntax.
 
 How to Transpile
 ---------
