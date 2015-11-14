@@ -144,8 +144,8 @@ There are certain core functions available in the "sys" namespace some of which 
 **loadText** - method::(path) - synchronously loads a file as text with the fs module    
 **processPost** - method::(req, res, callback) - loads and parses post data which is returned in the callback    
 **renderView** - method::(string, data) - just a wrapper around mustache.parse    
-**output** - main/method:: console.log    
-**input** - main::(value) - reads a line from stdin and places it in value 
+**out** - main/method:: console.log    
+**in** - main::(value) - reads a line from stdin and places it in value 
 
 More Syntax
 -----------
