@@ -228,7 +228,7 @@ looper.action -> output              // dump action into output
 sys.out[ output ]                    // print output
 ~                                    // end loop block
 ```
-The previous example shows how a tilde block with keyword "loop" can be used to conditionally loop over a block of code. The other use of a tilde block is to set up an event listener. Currently this usage is in development and only has one set implementation: the http server. [Here is a full example](https://github.com/incrediblesound/weirdo/tree/master/example/one) of an http server that parses post data and render templates with [mustache](https://github.com/janl/mustache.js). The tilde block event listener looks like this:
+The previous example shows how a tilde block with keyword "loop" can be used to conditionally loop over a block of code. The other use of a tilde block is to set up an event listener. Currently this feature has two distinct use cases: the http server and module events. [Here is a full example](https://github.com/incrediblesound/weirdo/tree/master/example/one) of an http server that parses post data and render templates with [mustache](https://github.com/janl/mustache.js). The tilde block event listener for the http server looks like this:
 ```code
 ~on[ sys.server.receive ]
 
@@ -236,4 +236,24 @@ router.process[ request, response ]
 
 ~
 ```
-When the http server receives a request, the block of code inside the tildes will run with the request and response objects automatically instantiated.
+This block of code will create an http server and set it listening to process.env.PORT or port 3000. When the http server receives a request, the block of code inside the tildes will run with the request and response objects automatically instantiated.
+
+You can also use the ~on block for normal events. [This example](https://github.com/incrediblesound/weirdo/tree/master/example/two) is simple but functional. The basic usage is like this:
+```code
+~on[ module.event ]
+
+module.method[ data ]
+
+~
+```
+In the square brackets following the ~on you enter the module name and event name separated by a period. You can call that event inside any method inside the module using the @ symbol. The variable "data" will be automatically passed into the scope inside the tildes and is defined by an optional argument to the event as shown below. 
+```code
+@Module
+
+someMethod[..][n]{
+
+if(n > 100) ->
+  @event(n);
+if;
+
+}
