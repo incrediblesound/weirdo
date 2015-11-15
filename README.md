@@ -1,7 +1,9 @@
 Weirdo
 ======
 
-Weirdo is my attempt to manifest all my weird ideas about software into a language that transpiles into JavaScript. Other than experimenting with weird ideas, Weirdo is also my attempt to create a fun language that has what I personally consider attractive syntax.
+Weirdo is my attempt to manifest all my weird ideas about software into a language that transpiles into JavaScript. The main idea is that modules are self-contained units that take input and give output and that's it. You can't "inherit" from them and you can't "compose" other modules from them. The way that Weirdo enforces this is by using two specific domains: the module domain and the main domain. Modules can only be instantiated and utilized in the main function which has a simple syntax centered around input and output. 
+
+Other than experimenting with weird ideas, Weirdo is also my attempt to create a fun language that has what I personally consider attractive syntax.
 
 Table of Contents:    
 [How to Transpile](#how-to-transpile)    
