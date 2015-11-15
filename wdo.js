@@ -52,6 +52,23 @@ var argsAreNumbers = ARG_IS_TYPE('number');
 
 var argsAreStrings = ARG_IS_TYPE('string');
 
+var argIsValue = function(args, method){
+	if(!Array.isArray(args)){
+		if(args.isWdoValue === undefined || !args.isWdoValue()){
+			throw new Error('Method '+method+' has '+typeof args+
+				' argument in a Weirdo value argument position');
+		};
+	} else {
+		var i = 0, l = args.length;
+		for(i; i < l; i++){
+			if(args[i].isWdoValue === undefined || !args[i].isWdoValue()){
+				throw new Error('Method '+method+' has '+typeof args+
+				' argument in a Weirdo value argument position');
+			}
+		}
+	}
+}
+
 function ARG_IS_TYPE(type){
 	return function(args, method){
 		if(!Array.isArray(args)){
@@ -80,8 +97,17 @@ var invokeRecursive = function(func, context, args){
 }
 
 // basic types for Weirdo values //
+var WdoValue = function(){}
+WdoValue.prototype.get = function(){
+	return this.value;
+}
+
+WdoValue.prototype.isWdoValue = function(){
+	return true;
+}
 
 var _Number = function(){}
+_Number.prototype = Object.create(WdoValue.prototype);
 _Number.prototype.set = function(value){
 	if(typeof value !== 'number'){
 		throw new Error('Error: non-number assigned to number value');
@@ -89,20 +115,15 @@ _Number.prototype.set = function(value){
 		this.value = value;
 	}
 }
-_Number.prototype.get = function(){
-	return this.value;
-}
 
 var _String = function(){}
+_String.prototype = Object.create(WdoValue.prototype);
 _String.prototype.set = function(value){
 	if(typeof value !== 'string'){
 		throw new Error('Error: non-string assigned to string value');
 	} else {
 		this.value = value;
 	}
-}
-_String.prototype.get = function(){
-	return this.value;
 }
 
 // Parent class of Weirdo modules //
@@ -122,6 +143,7 @@ wdo_object.prototype.wdo_get = function(attr){
 module.exports = {
 	argsAreNumbers: argsAreNumbers,
 	argsAreStrings: argsAreStrings,
+	argIsValue: argIsValue,
 	invokeRecursive: invokeRecursive,
 	loadText: loadText,
 	processPost: processPost,

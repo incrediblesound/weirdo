@@ -4,8 +4,8 @@ Init [..][..]{
 	Self = {processError: ''}
 }
 
-.processError[Str][input]{
-	Self = 'Your input string: \"'+ input + '\" could not be processed';
+.processError[Val][input]{
+	Self = 'Your input string: \"'+ input.get() + '\" could not be processed';
 }
 
 @Looper
@@ -28,7 +28,7 @@ Init [..][..]{
 
 	if(input === "help") ->
 
-		@warn(input);
+		@warn(x);
 		<- false;
 
 	elif(input !== "quit") ->
