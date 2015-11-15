@@ -201,6 +201,8 @@ There are certain core functions available in the "sys" namespace some of which 
 <a name="method-syntax"/>
 ##Method Syntax
 
+Methods should be able to take most normal JavaScript but they also offer some special sugar that makes writing JavaScript much faster and easier. The most obvious is the lack of var, which is automatically added by the compiler.
+
 ###Typed Arguments
 For methods that take primitives you can specify basic types:
 
@@ -221,6 +223,12 @@ Init [Str][name]{
 	Self.name = name;
 }
 ```
+If you want to pass in an instantiated value from main, you must use the "Val" type and call the get method on it to get the raw value out:
+```code
+.error [Val][output]{
+  sys.out("Error: "+ output.get());
+}
+```
 
 ###if / else if sugar
 Inside modules if / else if blocks have a little syntactic sugar:
@@ -235,6 +243,25 @@ Inside modules if / else if blocks have a little syntactic sugar:
 		Self = true;
 	if;
 }
+```
+
+###Iterating over Arrays
+There is a special syntax you can use for iterating over arrays. The block of code below is taken from the section "complex example" above. To iterate over an array use the keywork "each" followed by the name of the array you want to iterate over, the variable name for the current array item in the iteration, and finally an arrow. To close off the for-loop block use the keyword "each" with a semi-colon.
+```code
+    diffs = [];             
+    x = Self.sum / Self.num;    // x is our current average
+
+    each Self.log y ->          // for loop sugar!
+        z = y - x;              // z is current input minus avg of inputs
+        z = z * z;              // z is now z squared
+        diffs.push(z);          // store z
+    each;                       // remember to end if loops with "each;"
+
+    a = 0;
+
+    each diffs b ->             // calculate total of diffs
+        a += b;
+    each;
 ```
 <a name="tilde-blocks"/>
 ##Tilde Blocks
