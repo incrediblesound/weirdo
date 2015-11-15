@@ -1,0 +1,24 @@
+include "module"
+
+looper <- Looper
+errors <- ErrorHandler
+input <- Str
+output <- Str
+
+~on[ looper.warn ]
+
+errors.processError[ data ]
+errors.processError -> output
+sys.out[ output ]
+
+~
+
+~loop[ looper.checkExit[ input ] ]   
+
+sys.in[ input ]                      
+
+looper.action[ input ]               
+looper.action -> output              
+
+sys.out[ output ]                    
+~

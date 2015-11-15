@@ -3,6 +3,7 @@ var fs = require('fs');
 var qs = require('querystring');
 var http = require('http');
 var mustache = require('mustache');
+var events = require('events');
 
 // Utility functions for convenience //
 
@@ -107,6 +108,8 @@ _String.prototype.get = function(){
 // Parent class of Weirdo modules //
 
 var wdo_object = function(){};
+
+wdo_object.prototype = Object.create(events.EventEmitter.prototype);
 
 wdo_object.prototype.wdo_get = function(attr){
 	if(this.data[attr] === undefined){

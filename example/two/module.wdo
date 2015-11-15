@@ -1,0 +1,42 @@
+@ErrorHandler
+
+Init [..][..]{
+	Self = {processError: ''}
+}
+
+.processError[Str][input]{
+	Self = 'Your input string: \"'+ input + '\" could not be processed';
+}
+
+@Looper
+
+Init [..][..]{
+	Self = {action: ''};
+}
+
+.action[..][->]{
+	<- Self;
+}
+
+.action[..][n]{
+	Self = "You typed: " + n.get();
+}
+
+.checkExit[..][x]{
+
+	input = x.get();
+
+	if(input === "help") ->
+
+		@warn(input);
+		<- false;
+
+	elif(input !== "quit") ->
+
+		<- true;
+
+	else ->
+
+		<- false;
+	if;
+}
