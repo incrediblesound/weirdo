@@ -3,15 +3,25 @@ Weirdo
 
 Weirdo is my attempt to manifest all my weird ideas about software into a language that transpiles into JavaScript. Other than experimenting with weird ideas, Weirdo is also my attempt to create a fun language that has what I personally consider attractive syntax.
 
-How to Transpile
----------
+Table of Contents:    
+[How to Transpile](#how-to-transpile)    
+[Module Overview](#module-overview)    
+[Main Overview](#main-overview)    
+[Complex Example](#complex-example)    
+[Core Functions](#core-functions)    
+[Method Syntax](#method-syntax)    
+[Tilde Blocks](#tilde-blocks)    
+
+<a name="how-to-transpile"/>
+##How to Transpile
+
 The weirdo main file takes two arguments: the path to the main file of your weirdo program and the output file to be generated.
 ```shell
 node weirdo.js /path/to/main output.js
 ```
+<a name="module-overview"/>
+##Module Overview
 
-Module System
--------------
 A weirdo program consists of a set of modules and a single main file. Modules have methods that maintain state. Most logic should be encapsulated in modules. In the main file you create instances of modules and feed them data. Below is a weirdo program that will transpile and run just fine. Lets start with a simple module:
 
 ```code
@@ -63,6 +73,9 @@ There are also two speical symbols that can be used in the argument names positi
 "->" designates this function as the getter method for the state of the named method    
 "~"  designated this function as a recursive call on an indeterminate number of arguments    
 
+<a name="main-overview"/>
+##Main Overview
+
 There is also some special syntax for writing the function bodies of the methods themselves, but we'll get into that later on. Once you have some basic methods you can only use them in a Weirdo main file. A main file is a high-level input-output layer for manipulating modules. Here's an example using the module we defined above:
 
 ```code
@@ -97,6 +110,8 @@ sys.out[ name ]  // This invokes the system out function with the string instanc
 ```code
 calc.max -> num  // num is set to the state of the max method or the return value of the max getter
 ```
+<a name="complex-example"/>
+##Complex Example
 
 Before jumping into method syntax I want to show you a more complicated example. I will add a method to the Calc module that takes numbers and whose state reflects the current standard deviation of all numbers inputed so far.
 
@@ -169,11 +184,9 @@ The above code will log
 26.800186566514792
 23.978323544401512
 ```
-Features
---------
-Each method has its own state which is determined by a property of the module's state and is pointed to by "Self" when inside the method. When assigning the state of a method to a variable in the main file the entire state will be dumped into the variable unless you define a special function like in the deviation example above.
 
-Main files are basically a high level coordination of input/output values and module methods. There is very little control except for that which is currently provided in tilde blocks.
+<a name="core-functions"/>
+##Core Functions
 
 There are certain core functions available in the "sys" namespace some of which are available in methods and some in main. Here is the current list:
 
@@ -183,8 +196,8 @@ There are certain core functions available in the "sys" namespace some of which 
 **out** - main/method:: console.log    
 **in** - main::(value) - reads a line from stdin and places it in value 
 
-More Syntax
------------
+<a name="method-syntax"/>
+##Method Syntax
 
 ###Typed Arguments
 For methods that take primitives you can specify basic types:
@@ -221,8 +234,12 @@ Inside modules if / else if blocks have a little syntactic sugar:
 	if;
 }
 ```
+<a name="tilde-blocks"/>
+##Tilde Blocks
+
+I've decided to implement certain patterns as "tilde expressions". The idea is to create high-level control structures by wrapping block of code between two tildes.
+
 ###conditional loop:
-I've decided to implement certain patterns as "tilde expressions". The idea is to create high-level control structures by wrapping block of code between two tildes. Consider the following example, first the module:
 ```
 @Looper
 
@@ -264,6 +281,9 @@ looper.action -> output              // dump action into output
 sys.out[ output ]                    // print output
 ~                                    // end loop block
 ```
+
+### Event Listener
+
 The previous example shows how a tilde block with keyword "loop" can be used to conditionally loop over a block of code. The other use of a tilde block is to set up an event listener. Currently this feature has two distinct use cases: the http server and module events. [Here is a full example](https://github.com/incrediblesound/weirdo/tree/master/example/one) of an http server that parses post data and render templates with [mustache](https://github.com/janl/mustache.js). The tilde block event listener for the http server looks like this:
 ```code
 ~on[ sys.server.receive ]
