@@ -13,3 +13,13 @@ Init [Str][name]{
 	Self.age = age;
 	Self.name = name;
 }
+
+@Another
+
+Init [..][..]{
+	Self = 0;	
+}
+
+.info [..][n]{
+	Self = n
+}

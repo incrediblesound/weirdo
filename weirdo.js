@@ -7,6 +7,7 @@ var CompilerControl = require('./lib/utility/compilerControl.js');
 var fileComponents =  require('./lib/utility/fileComponents.js');
 var compilePieces =   require('./lib/compiler.js');
 var parsers = 		  require('./lib/parsers.js');
+var prepModuleState = require('./lib/prepareModuleState.js');
 
 program.parse(process.argv);
 var src_arg = program.args[0];
@@ -28,6 +29,8 @@ while(include.test(mainLines[0])){
 	moduleFiles.push(module);
 }
 
+var IS_MODULE = true;
+var IS_MAIN = false;
 
 var control = new CompilerControl();
 
@@ -37,14 +40,18 @@ var parseText, pieces, moduleText;
 _.each(moduleFiles, function(module){
 	moduleText = fs.readFileSync(sourcePath+'/'+module+'.wdo').toString();
 	parseText = new ParseText(moduleText);
+
 	pieces = parsers.moduleParser(parseText);
+	prepModuleState(pieces);
 	compilePieces(pieces, control);
+
 	finalResult += control.empty();
 })
 
 mainLines = _.removeEmpties(mainLines);
+
 pieces = parsers.mainParser(mainLines);
-compilePieces(pieces, control);
+compilePieces(pieces, control, IS_MAIN);
 
 finalResult += control.empty();
 fs.writeFileSync(out_arg, finalResult);
