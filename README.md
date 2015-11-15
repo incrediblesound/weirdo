@@ -73,10 +73,12 @@ There are also two speical symbols that can be used in the argument names positi
 "->" designates this function as the getter method for the state of the named method    
 "~"  designated this function as a recursive call on an indeterminate number of arguments    
 
+There is also some special syntax for writing the function bodies of the methods themselves, but that is covered in the section on [method syntax](#method-syntax).
+
 <a name="main-overview"/>
 ##Main Overview
 
-There is also some special syntax for writing the function bodies of the methods themselves, but we'll get into that later on. Once you have some basic methods you can only use them in a Weirdo main file. A main file is a high-level input-output layer for manipulating modules. Here's an example using the module we defined above:
+ Once you have some basic methods you can only use them in a Weirdo main file. A main file is a high-level input-output layer for manipulating modules. Here's an example using the module we defined above:
 
 ```code
 include "calc"  // import all modules in the file named calc.wdo
