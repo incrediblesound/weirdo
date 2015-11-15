@@ -12,7 +12,7 @@ node weirdo.js /path/to/main output.js
 
 Module System
 -------------
-A weirdo program consists of a set of modules and a single main file. Modules have methods that maintain state and all most logic should be encapsulated in modules. In the main file you create instances of modules and feed them data. Below is a weirdo program that will transpile and run just fine. Lets start with a simple module:
+A weirdo program consists of a set of modules and a single main file. Modules have methods that maintain state. Most logic should be encapsulated in modules. In the main file you create instances of modules and feed them data. Below is a weirdo program that will transpile and run just fine. Lets start with a simple module:
 
 ```code
 @Calc             // declare a module named Calc
@@ -27,7 +27,43 @@ Init [..][..]{    // this function takes no arguments
 	Self = x;                 // the state of the module (specific to this method) is set to x
 }
 ```
-Pretty weird huh? We can import and use that module in a main file like this:
+Pretty weird huh? Here is the basic module syntax:
+###Declaration
+First declare the module with an @ symbol and an uppercase name
+```code
+@Module
+```
+###Init function
+Each module must have an init function that defines the structure of that modules state. The state can be defined as either a map of method names to values, in which case it will be untouched, or as a single primitive value, in which case it will be converted into a map where each method starts with a state of that value. For example:
+```code
+Init [..][..]{
+  Self = 0;
+}
+```
+If we use the above init function in a module and then go on to define methods called min, max, sum and average, the actual value of self will be converted during transpilation into this:
+```javascript
+this.data = { min: 0, max: 0, sum: 0, average: 0 };
+```
+If instead you want to set unique starting values for each method, just set the value of Self to a map of method names like this:
+```code
+Init [..][..]{
+  Self = { min: 0, max: 100, sum: 0, average: [] };
+}
+```
+Once you have an init function you can go on to define module methods. Each method starts with a period followed by the method name, the argument types in brackets, the argument names in brackets and finally the method body surrounded by curly braces. Argument types and names are optional and you may supply the double dot ".." to ignore that feature.
+
+Argument types:
+
+*Str* -  string literal    
+*Num* -  JavaScript number    
+*Val* -  Weirdo value (instantiated in main)    
+
+There are also two speical symbols that can be used in the argument names position:
+
+"->" designates this function as the getter method for the state of the named method    
+"~"  designated this function as a recursive call on an indeterminate number of arguments    
+
+There is also some special syntax for writing the function bodies of the methods themselves, but we'll get into that later on. Once you have some basic methods you can only use them in a Weirdo main file. A main file is a high-level input-output layer for manipulating modules. Here's an example using the module we defined above:
 
 ```code
 include "calc"  // import all modules in the file named calc.wdo
@@ -44,7 +80,7 @@ calc.max -> result  // dump the state of the max method into result
 
 sys.out[ result  ]  // print the value of result to the console (which is 13 btw)
 ```
-That main file doesn't look much like JavaScript does it. A Weirdo main file contains three different kinds of basic expressions:
+That main file doesn't look much like JavaScript does it! A Weirdo main file contains three different kinds of basic expressions:
 
 ###Instance
 ```code
@@ -55,19 +91,19 @@ name <- Str    // name is an instance of a Weirdo string value
 ###Invocation
 ```code
 calc.max[ 2, 3 ] // This invokes the method "max" on the module instance calc with the arguments 2 and 3
-sys.out[ name ]  // This invokes the system out function with the string instance name
+sys.out[ name ]  // This invokes the system out function with the string instance "name"
 ```
 ###assignment
 ```code
 calc.max -> num  // num is set to the state of the max method or the return value of the max getter
 ```
 
-Ok, now lets try a more complicated example. I will add a method to the Calc module that takes numbers and whose state reflects the current standard deviation of all numbers inputed so far.
+Before jumping into method syntax I want to show you a more complicated example. I will add a method to the Calc module that takes numbers and whose state reflects the current standard deviation of all numbers inputed so far.
 
 ```code
 @Calc
 
-// first of all, we add a comlex state object for our 
+// first of all, we add a complex state object for our 
 // standard deviation method
 
 Init [..][..]{
