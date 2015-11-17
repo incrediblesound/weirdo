@@ -13,6 +13,7 @@ Table of Contents:
 [Core Functions](#core-functions)    
 [Method Syntax](#method-syntax)    
 [Tilde Blocks](#tilde-blocks)    
+[Questions and Areas for Improvement](#improvement)
 
 <a name="how-to-transpile"/>
 ##How to Transpile
@@ -344,3 +345,11 @@ if(n > 100) ->
 if;
 
 }
+```
+
+<a name="improvement"/>
+#Questions and Areas for Improvement
+
+- What to do about the wdo_core functions. Are they necessary or even useful? Should there be a core set and an extension set? How should they be included in a program during transpilation?
+- Should there be a way for users to extend the Weirdo core?
+- Currently Weirdo does not have good support for nested scopes in methods. Do subroutines in module methods go against the philosophy of Weirdo or are they an important tool that should be supported?
