@@ -126,6 +126,16 @@ _String.prototype.set = function(value){
 	}
 }
 
+var _Object = function(){}
+_Object.prototype = Object.create(WdoValue.prototype);
+_Object.prototype.set = function(value){
+	if(typeof value !== 'object'){
+		throw new Error('Error: non-object assigned to number value');
+	} else {
+		this.value = value;
+	}
+}
+
 // Parent class of Weirdo modules //
 
 var wdo_object = function(){};
@@ -150,6 +160,7 @@ module.exports = {
 	renderView: renderView,
 	Num: _Number,
 	Str: _String,
+	Map: _Object,
 	out: output,
 	wdo_object: wdo_object,
 	in: input

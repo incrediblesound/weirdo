@@ -42,7 +42,7 @@ _.each(moduleFiles, function(module){
 	parseText = new ParseText(moduleText);
 
 	pieces = parsers.moduleParser(parseText);
-	prepModuleState(pieces);
+	prepModuleState(pieces, control);
 	compilePieces(pieces, control);
 
 	finalResult += control.empty();
