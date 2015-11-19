@@ -1,0 +1,55 @@
+@Tree
+
+Init[Num][n]{
+	Self = { 
+		insert: {
+			root: {
+				value: n, 
+				left: null, 
+				right: null
+			},
+			pointer: null
+		},
+		max: 0
+	}
+}
+
+.insert[..][->]{
+	<- Self.root;
+}
+
+.insert[Num][n]{
+	if(Self.pointer === null) ->
+		Self.pointer = Self.root;
+	if;
+
+	newTree = { value: null, left: null, right: null };
+
+	if(n < Self.pointer.value) ->
+		if(Self.pointer.left === null) ->
+			Self.pointer.left = newTree;
+			newTree.value = n;
+			Self.pointer = Self.root;
+		else ->
+			Self.pointer = Self.pointer.left;
+			.insert(n);
+		if;
+	elif(n > Self.pointer.value) ->
+		if(Self.pointer.right === null) ->
+			Self.pointer.right = newTree;
+			newTree.value = n;
+			Self.pointer = Self.root;
+		else ->
+			Self.pointer = Self.pointer.right;
+			.insert(n);
+		if;
+	if;
+}
+
+.max[Val][tree]{
+	if(tree.right === null)->
+		Self = tree.value;
+	else ->
+		.max(tree.right);
+	if;
+}
