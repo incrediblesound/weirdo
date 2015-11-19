@@ -69,7 +69,6 @@ describe("Module Parser", function(){
 	it("parses getters", function(){
 		var parseText = new ParseText(data.modulePieces.getter);
 		var result = parsers.moduleParser(parseText);
-		console.log(result[0]);
 		expect(result[0].type).toBe('object_method');
 		expect(result[0].data[0].type).toBe('method_name');
 		expect(result[0].data[0].data).toBe('deviation');

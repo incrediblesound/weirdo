@@ -11,5 +11,9 @@ module.exports = {
 	    method_one: '.max [Num][~]{\n\tx = Self > n ? Self : n;\n\tSelf = x;\n}\n\n',
 	    getter: '.deviation [..][->]{\n\t<- Self.dev;\n}\n\n',
 	    method_two:'.deviation [Num][~]{\n\tSelf.num++;\n\tSelf.sum += n;\n\tSelf.log.push(n);\n\tdiffs = [];\n\tx = Self.sum / Self.num;\n\teach Self.log y ->\n\t\tz = y - x;\n\t\tz = z * z;\n\t\tdiffs.push(z);\n\teach;\n\n\ta = 0;\n\teach diffs b ->\n\t\ta += b;\n\teach;\n\tc = a / diffs.length;\n\n\tSelf.dev = Math.sqrt(c);\n}'	
+    },
+    parsedPieces: {
+    	objectDeclaration: [{"type":"object_declaration","data":"Calc"}],
+    	objectMethod: [{"type":"object_method","data":[{"type":"method_name","data":"max"},{"type":"method_types","data":"Num"},{"type":"method_args","data":["~"]},{"type":"method_body","data":["\n\tx = Self > n ? Self : n","\n\tSelf = x","\n"]}]}]
     }
 }
