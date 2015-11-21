@@ -18,7 +18,7 @@ Table of Contents:
 <a name="how-to-transpile"/>
 ##How to Transpile
 
-The weirdo main file takes two arguments: the path to the main file of your weirdo program and the output file to be generated.
+The weirdo main file takes two arguments: the path to the main file of your weirdo program and the output file to be generated. The main file is assumed to have a .wdo extension. Because Weirdo is still in an exprimental phase I haven't tried using it for standalone projects. As a result there is not global Weirdo via npm or any such thing, so if you want to use the core functions, for example, you need to make sure your output file is in the same directory as the wdo.js file.
 ```shell
 node weirdo.js /path/to/main output.js
 ```
