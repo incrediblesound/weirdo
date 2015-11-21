@@ -9,6 +9,7 @@ module.exports = invocation = function(data, control){
 		var constructor = control.variables[data.object];
 
 		if(control.objects[constructor] !== undefined){
+			// its constructor is a module, check the argTypes
 			argTypes = control.objects[constructor][data.method].argTypes;
 			_.checkArgTypes(argTypes, data, control.variables);
 		}

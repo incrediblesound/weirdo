@@ -184,6 +184,8 @@ function valueToType(value){
 }
 
 function checkArgTypes(argTypes, data, variables){
+	if(!argTypes) return;
+	
 	var special = ['request','response', 'data'];
 	var basicTypes = { Num: true, Str: true, Map: true};
 	var args = data.args;

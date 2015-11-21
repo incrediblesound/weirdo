@@ -11,7 +11,7 @@ module.exports = tildeExpression = function(data, control){
 }
 
 function tildeLoop(data, control){
-	var moduleMap = require('../compilerModules.js');
+	var moduleMap = require('./modules.js');
 
 	var id = _.makeId();
 	var test = data.shift()[0];
@@ -29,10 +29,10 @@ function tildeLoop(data, control){
 }
 
 function tildeOn(data, control){
-	var moduleMap = require('../compilerModules.js');
+	var moduleMap = require('./modules.js');
 
 	var source = data.shift()[0];
-	if(source === 'sys.server.receive'){
+	if(source.data === 'sys.server.receive'){
 		httpServer(data, control);
 	} else {
 		moduleEvent(source, data, control);
@@ -40,7 +40,7 @@ function tildeOn(data, control){
 }
 
 function httpServer(data, control){
-	var moduleMap = require('../compilerModules.js');
+	var moduleMap = require('./modules.js');
 
 	var id = _.makeId();
 	control.add('var '+id+'_event = function(request, response){\n');
@@ -57,7 +57,7 @@ function httpServer(data, control){
 }
 
 function moduleEvent(source, data, control){
-	var moduleMap = require('../compilerModules.js');
+	var moduleMap = require('./modules.js');
 
 	var path = source.data.split('.');
 	var module = path[0];

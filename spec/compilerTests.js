@@ -1,5 +1,5 @@
-var compiler = require('../lib/compiler.js');
-var Control = require('../lib/utility/compilerControl.js');
+var compiler = require('../src/compiler.js');
+var Control = require('../src/utility/compilerControl.js');
 var data = require('./data/data.js');
 
 describe("Compile Modules", function(){

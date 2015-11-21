@@ -1,10 +1,10 @@
 var fs = require('fs');
 var program = require('commander');
 
-var _ =				  require('./lib/utility/Util.js');
-var main =			  require('./lib/main.js');
-var constants =		  require('./lib/utility/constants.js');
-var fileComponents =  require('./lib/utility/fileComponents.js');
+var _ =				  require('./src/utility/Util.js');
+var main =			  require('./src/main.js');
+var constants =		  require('./src/utility/constants.js');
+var fileComponents =  require('./src/utility/fileComponents.js');
 
 program.parse(process.argv);
 

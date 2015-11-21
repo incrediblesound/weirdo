@@ -9,13 +9,13 @@ var objectDelaration = require('./objectDeclaration.js');
 var objectMethod = require('./objectMethod.js');
 
 module.exports = {
-	assignment: assignment,
-	objectInit: objectInit,
-	addMethodBody: addMethodBody,
-	instance: instance,
-	invocation: invocation,
-	tildeBlock: tildeBlock,
 	compileArguments: compileArguments,
-	objectMethod: objectMethod,
-	objectDeclaration: objectDeclaration
+	addMethodBody: addMethodBody,
+	'object_declaration': objectDeclaration,
+	'object_method': objectMethod,
+	'tildeExpression': tildeBlock,
+    'object_init': objectInit,
+	'instance': instance,
+	'invocation': invocation,
+	'assignment': assignment
 }

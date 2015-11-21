@@ -46,7 +46,7 @@ function basicLineProcess(control, line, domain){
 		line = line.replace(/Self/g, 'this.data[\"'+domain+'\"]');
 	}
 
-	line = line.replace(/sys./, 'wdo.');
+	line = line.replace(/sys./g, 'wdo.');
 	if(recursiveCall.test(line)){
 		line = 'this'+line;
 	}

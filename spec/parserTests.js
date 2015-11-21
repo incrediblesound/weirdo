@@ -1,5 +1,5 @@
-var ParseText = require('../lib/utility/parseText.js');
-var parsers = require('../lib/parsers.js');
+var ParseText = require('../src/utility/parseText.js');
+var parsers = require('../src/parsers.js');
 var data = require('./data/data.js');
 
 describe("Main Parser", function(){

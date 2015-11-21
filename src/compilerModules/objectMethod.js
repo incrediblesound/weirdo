@@ -23,10 +23,11 @@ module.exports = objectMethod = function(data, control){
             return;
         }
 
-        control.add(object_name+'.prototype.'+method_name+' = function(){\n');
-        control.add('var args = Array.prototype.slice.call(arguments);\n');
 
         if(argNames[0] === '~'){
+            control.add(object_name+'.prototype.'+method_name+' = function(){\n');
+            control.add('var args = Array.prototype.slice.call(arguments);\n');
+
             control.objects[object_name][method_name].args = '~';
             control.add('var method_body = function(n){\n')
             addMethodBody(control, body, method_name);
@@ -34,10 +35,12 @@ module.exports = objectMethod = function(data, control){
             control.add('wdo.invokeRecursive(method_body, this, args);\n')
 		}
 		else if(_.notNull(argNames)){
+            control.add(object_name+'.prototype.'+method_name+
+                ' = function('+_.printArgs(argNames)+'){\n');
 			control.objects[object_name][method_name].args = argNames;
-			_.setArgumentVariables(control, argNames);
 		}
 		else {
+            control.add(object_name+'.prototype.'+method_name+' = function(){\n');
 			control.objects[object_name][method_name].args = false;
 		}
 
