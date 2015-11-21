@@ -353,3 +353,4 @@ if;
 - What to do about the wdo_core functions. Are they necessary or even useful? Should there be a core set and an extension set? How should they be included in a program during transpilation?
 - Should there be a way for users to extend the Weirdo core?
 - Currently Weirdo does not have good support for nested scopes in methods. Do subroutines in module methods go against the philosophy of Weirdo or are they an important tool that should be supported?
+- I don't like the aesthetics of callbacks, should I build node-threads into Weirdo so that users can avoid callbacks entirely in their code?
