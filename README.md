@@ -18,9 +18,9 @@ Table of Contents:
 <a name="how-to-transpile"/>
 ##How to Transpile
 
-The weirdo main file takes two arguments: the path to the main file of your weirdo program and the output file to be generated. The main file is assumed to have a .wdo extension. Because Weirdo is still in an exprimental phase I haven't tried using it for standalone projects. As a result there is not global Weirdo via npm or any such thing, so if you want to use the core functions, for example, you need to make sure your output file is in the same directory as the wdo.js file.
+The weirdo main file takes two or three arguments. The path to the main file of your weirdo program and the path to the output file to be generated are both required. If you use any of the core functions in the sys namespace you can add "src" as a third argument to copy the source of the core module into your output directory. It is advisable that you then edit the core module (wdo.js) to contain the specific methods you desire. If you don't want to use the core methods at all add "nocore" as a third argument. The main file is assumed to have a .wdo extension. 
 ```shell
-node weirdo.js /path/to/main output.js
+node weirdo.js /my/project/main /my/project/output.js src
 ```
 <a name="module-overview"/>
 ##Module Overview
