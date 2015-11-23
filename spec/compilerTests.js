@@ -17,6 +17,6 @@ describe("Compile Modules", function(){
 
 		expect(control.objects.Calc.max).toBeDefined();
 		expect(control.objects.Calc.max).toEqual({ args: '~', variables: { x:true }, argTypes: 'Num' })
-		expect(control.result).toBe('Calc.prototype.max = function(){\nvar args = Array.prototype.slice.call(arguments);\nvar method_body = function(n){\nvar x = this.data["max"] > n ? this.data["max"] : n;\nthis.data["max"] = x;\n}\nwdo.invokeRecursive(method_body, this, args);\nx = this.data["max"] > n ? this.data["max"] : n;\nthis.data["max"] = x;\n}\n');
+		expect(control.result).toEqual('Calc.prototype.max = function(){\nvar args = Array.prototype.slice.call(arguments);\nvar method_body = function(n){\nvar x = this.data["max"] > n ? this.data["max"] : n;\nthis.data["max"] = x;\n}\nwdo.invokeRecursive(method_body, this, args);\nx = this.data["max"] > n ? this.data["max"] : n;\nthis.data["max"] = x;\n}\n');
 	})
 })

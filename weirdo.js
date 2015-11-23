@@ -10,9 +10,11 @@ program.parse(process.argv);
 
 var src_arg = program.args[0];
 var out_arg = program.args[1];
-var sourcePath = src_arg.split('/');
-sourcePath.pop();
-sourcePath = sourcePath.join('/');
+var copySource = program.args[2];
+var programSource = _.getSourcePath(program.rawArgs[1]);
+
+var sourcePath = _.getSourcePath(src_arg);
+var outputPath = _.getSourcePath(out_arg);
 
 var text = fs.readFileSync(''+src_arg+'.wdo').toString();
 
@@ -41,8 +43,26 @@ _.each(moduleFiles, function(moduleName){
 
 
 var compiledText = main(moduleText, mainLines);
+var finalResult;
 
-var finalResult = fileComponents.headerString;
+if(copySource === 'nocore'){
+	finalResult = fileComponents.simpleHeader;
+} else {
+	finalResult = fileComponents.headerString;	
+}
+
 finalResult += compiledText;
 
 fs.writeFileSync(out_arg, finalResult);
+
+if(copySource === 'src'){
+	var readCore = fs.createReadStream(programSource+'/wdo.js');
+	readCore.on('error', function(err){
+		console.log('Error reading core file: '+err);
+	})
+	var writeCore = fs.createWriteStream(outputPath+'/wdo.js');
+	readCore.on('error', function(err){
+		console.log('Error writing core file: '+err);
+	})
+	readCore.pipe(writeCore);
+}

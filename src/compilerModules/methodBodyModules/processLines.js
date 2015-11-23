@@ -38,7 +38,8 @@ module.exports = processLines = function(control, lines, domain, checkIf){
 }
 
 function basicLineProcess(control, line, domain){
-	var recursiveCall = new RegExp('\\.'+domain+'\\(');
+	var objectName = control.state.data;
+	var recursiveCall = /^\..*\(/;
 
 	if(domain === 'init'){
 		line = line.replace(/Self/g, 'this.data');

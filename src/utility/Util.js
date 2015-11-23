@@ -1,22 +1,34 @@
 
 module.exports = {
+	beginsWithTilde: beginsWithTilde,
+	checkArgTypes: checkArgTypes,
+	cleanSplit: cleanSplit,
+	contains: contains,
+	each: each,
+	findWhere: findWhere,
+	getSourcePath: getSourcePath,
 	isInstance: isInstance,
 	isAssignment: isAssignment,
-	noSpaces: noSpaces,
-	removeEmpties: removeEmpties,
-	each: each,
-	contains: contains,
-	findWhere: findWhere,
-	regexFind: regexFind,
-	printArgs: printArgs,
-	notNull: notNull,
-	setArgumentVariables: setArgumentVariables,
-	removeLeadingJunk: removeLeadingJunk,
-	cleanSplit: cleanSplit,
-	trim: trim,
-	beginsWithTilde: beginsWithTilde,
 	makeId: makeId(),
-	checkArgTypes: checkArgTypes
+	notNull: notNull,
+	noSpaces: noSpaces,
+	printArgs: printArgs,
+	regexFind: regexFind,
+	removeEmpties: removeEmpties,
+	removeLeadingJunk: removeLeadingJunk,
+	setArgumentVariables: setArgumentVariables,
+	trim: trim
+}
+
+function getSourcePath(url){
+	var sourcePath = url.split('/');
+	if(sourcePath.length === 1){
+		sourcePath = './';
+	} else {
+		sourcePath.pop();
+		sourcePath = sourcePath.join('/');
+	}
+	return sourcePath;
 }
 
 function isInstance(line){
