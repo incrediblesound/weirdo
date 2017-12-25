@@ -16,14 +16,14 @@ Table of Contents:
 [Questions and Areas for Improvement](#improvement)
 
 <a name="how-to-transpile"/>
-##How to Transpile
+## How to Transpile
 
 The weirdo main file takes two or three arguments. The path to the main file of your weirdo program and the path to the output file to be generated are both required. If you use any of the core functions in the sys namespace you can add "src" as a third argument to copy the source of the core module into your output directory. It is advisable that you then edit the core module (wdo.js) to contain the specific methods you desire. If you don't want to use the core methods at all add "nocore" as a third argument. The main file is assumed to have a .wdo extension. 
 ```shell
 node weirdo.js /my/project/main /my/project/output.js src
 ```
 <a name="module-overview"/>
-##Module Overview
+## Module Overview
 
 A weirdo program consists of a set of modules and a single main file. Modules have methods that maintain state. Most logic should be encapsulated in modules. In the main file you create instances of modules and feed them data. Below is a weirdo program that will transpile and run just fine. Lets start with a simple module:
 
@@ -46,7 +46,7 @@ First declare the module with an @ symbol and an uppercase name
 ```code
 @Module
 ```
-###Init function
+### Init function
 Each module must have an init function that defines the structure of that modules state. The state can be defined as either a map of method names to values, in which case it will be untouched, or as a single primitive value, in which case it will be converted into a map where each method starts with a state of that value. For example:
 ```code
 Init [..][..]{
@@ -79,7 +79,7 @@ There are also two speical symbols that can be used in the argument names positi
 There is also some special syntax for writing the function bodies of the methods themselves, but that is covered in the section on [method syntax](#method-syntax).
 
 <a name="main-overview"/>
-##Main Overview
+## Main Overview
 
  Once you have some basic methods you can only use them in a Weirdo main file. A main file is a high-level input-output layer for manipulating modules. Here's an example using the module we defined above:
 
@@ -100,23 +100,23 @@ sys.out[ result  ]  // print the value of result to the console (which is 13 btw
 ```
 That main file doesn't look much like JavaScript does it! A Weirdo main file contains three different kinds of basic expressions:
 
-###Instance
+### Instance
 ```code
 calc <- Calc   // calc is now an instance of the Calc module with its own state
 sum  <- Num    // sum is an instance of a Weirdo number value
 name <- Str    // name is an instance of a Weirdo string value
 ```
-###Invocation
+### Invocation
 ```code
 calc.max[ 2, 3 ] // This invokes the method "max" on the module instance calc with the arguments 2 and 3
 sys.out[ name ]  // This invokes the system out function with the string instance "name"
 ```
-###assignment
+### assignment
 ```code
 calc.max -> num  // num is set to the state of the max method or the return value of the max getter
 ```
 <a name="complex-example"/>
-##Complex Example
+## Complex Example
 
 Before jumping into method syntax I want to show you a more complicated example. I will add a method to the Calc module that takes numbers and whose state reflects the current standard deviation of all numbers inputed so far.
 
@@ -191,7 +191,7 @@ The above code will log
 ```
 
 <a name="core-functions"/>
-##Core Functions
+## Core Functions
 
 There are certain core functions available in the "sys" namespace some of which are available in methods and some in main. Here is the current list:
 
@@ -202,11 +202,11 @@ There are certain core functions available in the "sys" namespace some of which 
 **in** - main::(value) - reads a line from stdin and places it in value 
 
 <a name="method-syntax"/>
-##Method Syntax
+## Method Syntax
 
 Methods should be able to take most normal JavaScript but they also offer some special sugar that makes writing JavaScript much faster and easier. The most obvious is the lack of var, which is automatically added by the compiler.
 
-###Typed Arguments
+### Typed Arguments
 For methods that take primitives you can specify basic types:
 
 ```code
@@ -233,7 +233,7 @@ If you want to pass in an instantiated value from main, you must use the "Val" t
 }
 ```
 
-###if / else if sugar
+### if / else if sugar
 Inside modules if / else if blocks have a little syntactic sugar:
 
 ```code
@@ -248,7 +248,7 @@ Inside modules if / else if blocks have a little syntactic sugar:
 }
 ```
 
-###Iterating over Arrays
+### Iterating over Arrays
 There is a special syntax you can use for iterating over arrays. The block of code below is taken from the section "complex example" above. To iterate over an array use the keywork "each" followed by the name of the array you want to iterate over, the variable name for the current array item in the iteration, and finally an arrow. To close off the for-loop block use the keyword "each" with a semi-colon.
 ```code
     diffs = [];             
@@ -267,11 +267,11 @@ There is a special syntax you can use for iterating over arrays. The block of co
     each;
 ```
 <a name="tilde-blocks"/>
-##Tilde Blocks
+## Tilde Blocks
 
 I've decided to implement certain patterns as "tilde expressions". The idea is to create high-level control structures by wrapping block of code between two tildes.
 
-###conditional loop:
+### conditional loop:
 ```
 @Looper
 
@@ -348,7 +348,7 @@ if;
 ```
 
 <a name="improvement"/>
-#Questions and Areas for Improvement
+# Questions and Areas for Improvement
 
 - What to do about the wdo_core functions. Are they necessary or even useful? Should there be a core set and an extension set? How should they be included in a program during transpilation?
 - Should there be a way for users to extend the Weirdo core?
